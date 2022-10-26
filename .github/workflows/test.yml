@@ -1,0 +1,20 @@
+name: gojsonschema tests
+run-name: Running tests 🚀
+on: [push]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        go: ["1.19"]
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: ${{ matrix.go }}
+
+      - name: run go test
+        run: go test ./...
