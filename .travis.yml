@@ -1,8 +1,14 @@
 language: go
+arch:
+    - amd64
+    - ppc64le
+    - arm64
+    - arm64-graviton2
+
 go:
-  - "1.11"
-  - "1.12"
-  - "1.13"
+  - "1.18"
+  - "1.19"
+
 before_install:
   - go get github.com/xeipuuv/gojsonreference
   - go get github.com/xeipuuv/gojsonpointer
