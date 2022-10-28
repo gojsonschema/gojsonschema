@@ -1,6 +1,6 @@
 name: gojsonschema tests
 run-name: Running tests 🚀
-on: [push]
+on: [push, pull_request]
 
 jobs:
   tests:
