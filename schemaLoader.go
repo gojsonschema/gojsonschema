@@ -94,7 +94,10 @@ func (sl *SchemaLoader) validateMetaschema(documentNode interface{}) error {
 // AddSchemas adds an arbritrary amount of schemas to the schema cache. As this function does not require
 // an explicit URL, every schema should contain an $id, so that it can be referenced by the main schema
 func (sl *SchemaLoader) AddSchemas(loaders ...JSONLoader) error {
-	emptyRef, _ := jsonreference.New("")
+	emptyRef, err := jsonreference.New("")
+	if err != nil {
+	        return err
+	}
 
 	for _, loader := range loaders {
 		doc, err := loader.LoadJSON()
