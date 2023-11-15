@@ -6,7 +6,7 @@
 
 ## Description
 
-An implementation of JSON Schema for the Go  programming language. Supports draft-04, draft-06 and draft-07.
+An implementation of JSON Schema for the Go programming language. Supports draft-04, draft-06 and draft-07.
 
 References :
 
@@ -17,12 +17,12 @@ References :
 ## Installation
 
 ```
-go get github.com/xeipuuv/gojsonschema
+go get github.com/gojsonschema/gojsonschema
 ```
 
 Dependencies :
-* [github.com/xeipuuv/gojsonpointer](https://github.com/xeipuuv/gojsonpointer)
-* [github.com/xeipuuv/gojsonreference](https://github.com/xeipuuv/gojsonreference)
+* [github.com/go-openapi/jsonpointer](https://github.com/go-openapi/jsonpointer)
+* [github.com/go-openapi/jsonreference](https://github.com/go-openapi/jsonreference)
 * [github.com/stretchr/testify/assert](https://github.com/stretchr/testify#assert-package)
 
 ## Usage
@@ -35,7 +35,7 @@ package main
 
 import (
     "fmt"
-    "github.com/xeipuuv/gojsonschema"
+    "github.com/gojsonschema/gojsonschema"
 )
 
 func main() {
