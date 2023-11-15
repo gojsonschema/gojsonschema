@@ -18,7 +18,7 @@ import (
 	"bytes"
 	"errors"
 
-	"github.com/xeipuuv/gojsonreference"
+	"github.com/go-openapi/jsonreference"
 )
 
 // SchemaLoader is used to load schemas
@@ -94,7 +94,7 @@ func (sl *SchemaLoader) validateMetaschema(documentNode interface{}) error {
 // AddSchemas adds an arbritrary amount of schemas to the schema cache. As this function does not require
 // an explicit URL, every schema should contain an $id, so that it can be referenced by the main schema
 func (sl *SchemaLoader) AddSchemas(loaders ...JSONLoader) error {
-	emptyRef, _ := gojsonreference.NewJsonReference("")
+	emptyRef, _ := jsonreference.New("")
 
 	for _, loader := range loaders {
 		doc, err := loader.LoadJSON()
@@ -119,10 +119,10 @@ func (sl *SchemaLoader) AddSchemas(loaders ...JSONLoader) error {
 	return nil
 }
 
-//AddSchema adds a schema under the provided URL to the schema cache
+// AddSchema adds a schema under the provided URL to the schema cache
 func (sl *SchemaLoader) AddSchema(url string, loader JSONLoader) error {
 
-	ref, err := gojsonreference.NewJsonReference(url)
+	ref, err := jsonreference.New(url)
 
 	if err != nil {
 		return err

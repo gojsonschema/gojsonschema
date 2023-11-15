@@ -19,7 +19,7 @@ import (
 	"math"
 	"reflect"
 
-	"github.com/xeipuuv/gojsonreference"
+	"github.com/go-openapi/jsonreference"
 )
 
 // Draft is a JSON-schema draft version
@@ -110,7 +110,8 @@ func parseSchemaURL(documentNode interface{}) (string, *Draft, error) {
 			))
 		}
 
-		schemaReference, err := gojsonreference.NewJsonReference(m[KEY_SCHEMA].(string))
+		//schemaReference, err := jsonreference.NewJsonReference(m[KEY_SCHEMA].(string))
+		schemaReference, err := jsonreference.New(m[KEY_SCHEMA].(string))
 
 		if err != nil {
 			return "", nil, err

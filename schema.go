@@ -33,7 +33,7 @@ import (
 	"regexp"
 	"text/template"
 
-	"github.com/xeipuuv/gojsonreference"
+	"github.com/go-openapi/jsonreference"
 )
 
 var (
@@ -52,7 +52,7 @@ func NewSchema(l JSONLoader) (*Schema, error) {
 
 // Schema holds a schema
 type Schema struct {
-	documentReference gojsonreference.JsonReference
+	documentReference jsonreference.Ref
 	rootSchema        *subSchema
 	pool              *schemaPool
 	referencePool     *schemaReferencePool
@@ -73,7 +73,6 @@ func (d *Schema) SetRootSchemaName(name string) {
 // Pretty long function ( sorry :) )... but pretty straight forward, repetitive and boring
 // Not much magic involved here, most of the job is to validate the key names and their values,
 // then the values are copied into subSchema struct
-//
 func (d *Schema) parseSchema(documentNode interface{}, currentSchema *subSchema) error {
 
 	if currentSchema.draft == nil {
@@ -135,7 +134,7 @@ func (d *Schema) parseSchema(documentNode interface{}, currentSchema *subSchema)
 		))
 	}
 	if k, ok := m[keyID].(string); ok {
-		jsonReference, err := gojsonreference.NewJsonReference(k)
+		jsonReference, err := jsonreference.New(k)
 		if err != nil {
 			return err
 		}
@@ -226,7 +225,7 @@ func (d *Schema) parseSchema(documentNode interface{}, currentSchema *subSchema)
 
 	if k, ok := m[KEY_REF].(string); ok {
 
-		jsonReference, err := gojsonreference.NewJsonReference(k)
+		jsonReference, err := jsonreference.New(k)
 		if err != nil {
 			return err
 		}
