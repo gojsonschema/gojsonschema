@@ -27,9 +27,10 @@
 package gojsonschema
 
 import (
-	"github.com/xeipuuv/gojsonreference"
 	"math/big"
 	"regexp"
+
+	"github.com/go-openapi/jsonreference"
 )
 
 // Constants
@@ -80,7 +81,7 @@ type subSchema struct {
 	draft *Draft
 
 	// basic subSchema meta properties
-	id          *gojsonreference.JsonReference
+	id          *jsonreference.Ref
 	title       *string
 	description *string
 
@@ -93,7 +94,7 @@ type subSchema struct {
 	types jsonSchemaType
 
 	// Reference url
-	ref *gojsonreference.JsonReference
+	ref *jsonreference.Ref
 	// Schema referenced
 	refSchema *subSchema
 

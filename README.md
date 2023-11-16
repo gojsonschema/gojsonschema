@@ -1,12 +1,12 @@
-[![GoDoc](https://godoc.org/github.com/xeipuuv/gojsonschema?status.svg)](https://godoc.org/github.com/xeipuuv/gojsonschema)
-[![Build Status](https://travis-ci.org/xeipuuv/gojsonschema.svg)](https://travis-ci.org/xeipuuv/gojsonschema)
-[![Go Report Card](https://goreportcard.com/badge/github.com/xeipuuv/gojsonschema)](https://goreportcard.com/report/github.com/xeipuuv/gojsonschema)
+[![GoDoc](https://godoc.org/github.com/gojsonschema/gojsonschema?status.svg)](https://godoc.org/github.com/gojsonschema/gojsonschema)
+[![Go Report Card](https://goreportcard.com/badge/github.com/gojsonschema/gojsonschema)](https://goreportcard.com/report/github.com/gojsonschema/gojsonschema)
+
 
 # gojsonschema
 
 ## Description
 
-An implementation of JSON Schema for the Go  programming language. Supports draft-04, draft-06 and draft-07.
+An implementation of JSON Schema for the Go programming language. Supports draft-04, draft-06 and draft-07.
 
 References :
 
@@ -20,9 +20,16 @@ References :
 go get github.com/xeipuuv/gojsonschema
 ```
 
+To use this package you will need to use the replace directive
+
+In your go.mod, after running go get add the following.
+```
+replace github.com/xeipuuv/gojsonschema v1.2.0 => github.com/gojsonschema/gojsonschema {verison}
+```
+
 Dependencies :
-* [github.com/xeipuuv/gojsonpointer](https://github.com/xeipuuv/gojsonpointer)
-* [github.com/xeipuuv/gojsonreference](https://github.com/xeipuuv/gojsonreference)
+* [github.com/go-openapi/jsonpointer](https://github.com/go-openapi/jsonpointer)
+* [github.com/go-openapi/jsonreference](https://github.com/go-openapi/jsonreference)
 * [github.com/stretchr/testify/assert](https://github.com/stretchr/testify#assert-package)
 
 ## Usage
