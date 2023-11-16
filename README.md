@@ -17,7 +17,14 @@ References :
 ## Installation
 
 ```
-go get github.com/gojsonschema/gojsonschema
+go get github.com/xeipuuv/gojsonschema
+```
+
+To use this package you will need to use the replace directive
+
+In your go.mod, after running go get add the following.
+```
+replace github.com/xeipuuv/gojsonschema v1.2.0 => github.com/gojsonschema/gojsonschema {verison}
 ```
 
 Dependencies :
@@ -35,7 +42,7 @@ package main
 
 import (
     "fmt"
-    "github.com/gojsonschema/gojsonschema"
+    "github.com/xeipuuv/gojsonschema"
 )
 
 func main() {
