@@ -31,7 +31,7 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/xeipuuv/gojsonreference"
+	"github.com/go-openapi/jsonreference"
 )
 
 type schemaPoolDocument struct {
@@ -45,7 +45,7 @@ type schemaPool struct {
 	autoDetect          *bool
 }
 
-func (p *schemaPool) parseReferences(document interface{}, ref gojsonreference.JsonReference, pooled bool) error {
+func (p *schemaPool) parseReferences(document interface{}, ref jsonreference.Ref, pooled bool) error {
 
 	var (
 		draft     *Draft
@@ -73,7 +73,7 @@ func (p *schemaPool) parseReferences(document interface{}, ref gojsonreference.J
 	return err
 }
 
-func (p *schemaPool) parseReferencesRecursive(document interface{}, ref gojsonreference.JsonReference, draft *Draft) error {
+func (p *schemaPool) parseReferencesRecursive(document interface{}, ref jsonreference.Ref, draft *Draft) error {
 	// parseReferencesRecursive parses a JSON document and resolves all $id and $ref references.
 	// For $ref references it takes into account the $id scope it is in and replaces
 	// the reference by the absolute resolved reference
@@ -93,7 +93,7 @@ func (p *schemaPool) parseReferencesRecursive(document interface{}, ref gojsonre
 			keyID = KEY_ID
 		}
 		if existsMapKey(m, keyID) && isKind(m[keyID], reflect.String) {
-			jsonReference, err := gojsonreference.NewJsonReference(m[keyID].(string))
+			jsonReference, err := jsonreference.New(m[keyID].(string))
 			if err == nil {
 				localRef, err = ref.Inherits(jsonReference)
 				if err == nil {
@@ -106,7 +106,7 @@ func (p *schemaPool) parseReferencesRecursive(document interface{}, ref gojsonre
 		}
 
 		if existsMapKey(m, KEY_REF) && isKind(m[KEY_REF], reflect.String) {
-			jsonReference, err := gojsonreference.NewJsonReference(m[KEY_REF].(string))
+			jsonReference, err := jsonreference.New(m[KEY_REF].(string))
 			if err == nil {
 				absoluteRef, err := localRef.Inherits(jsonReference)
 				if err == nil {
@@ -136,7 +136,7 @@ func (p *schemaPool) parseReferencesRecursive(document interface{}, ref gojsonre
 	return nil
 }
 
-func (p *schemaPool) GetDocument(reference gojsonreference.JsonReference) (*schemaPoolDocument, error) {
+func (p *schemaPool) GetDocument(reference jsonreference.Ref) (*schemaPoolDocument, error) {
 
 	var (
 		spd   *schemaPoolDocument
@@ -150,7 +150,7 @@ func (p *schemaPool) GetDocument(reference gojsonreference.JsonReference) (*sche
 	}
 
 	// Create a deep copy, so we can remove the fragment part later on without altering the original
-	refToURL, _ := gojsonreference.NewJsonReference(reference.String())
+	refToURL, _ := jsonreference.New(reference.String())
 
 	// First check if the given fragment is a location independent identifier
 	// http://json-schema.org/latest/json-schema-core.html#rfc.section.8.2.3
@@ -165,7 +165,7 @@ func (p *schemaPool) GetDocument(reference gojsonreference.JsonReference) (*sche
 	// If the given reference is not a location independent identifier,
 	// strip the fragment and look for a document with it's base URI
 
-	refToURL.GetUrl().Fragment = ""
+	refToURL.GetURL().Fragment = ""
 
 	if cachedSpd, ok := p.schemaPoolDocuments[refToURL.String()]; ok {
 		document, _, err := reference.GetPointer().Get(cachedSpd.Document)

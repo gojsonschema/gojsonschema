@@ -37,8 +37,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-const displayErrorMessages = false
-
 const circularReference = `{
 	"type": "object",
 	"properties": {
@@ -378,5 +376,5 @@ func TestIncorrectRef(t *testing.T) {
 	s, err := NewSchema(schemaLoader)
 
 	assert.Nil(t, s)
-	assert.Equal(t, "Object has no key 'fail'", err.Error())
+	assert.Equal(t, "object has no key \"fail\"", err.Error())
 }
