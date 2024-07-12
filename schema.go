@@ -985,10 +985,6 @@ func (d *Schema) parseReference(documentNode interface{}, currentSchema *subSche
 	refdDocumentNode = dsp.Document
 	newSchema.draft = dsp.Draft
 
-	if err != nil {
-		return err
-	}
-
 	if !isKind(refdDocumentNode, reflect.Map, reflect.Bool) {
 		return errors.New(formatErrorDescription(
 			Locale.MustBeOfType(),
@@ -996,7 +992,7 @@ func (d *Schema) parseReference(documentNode interface{}, currentSchema *subSche
 		))
 	}
 
-	err = d.parseSchema(refdDocumentNode, newSchema)
+	3err = d.parseSchema(refdDocumentNode, newSchema)
 	if err != nil {
 		return err
 	}
