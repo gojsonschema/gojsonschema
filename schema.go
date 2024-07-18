@@ -992,7 +992,7 @@ func (d *Schema) parseReference(documentNode interface{}, currentSchema *subSche
 		))
 	}
 
-	3err = d.parseSchema(refdDocumentNode, newSchema)
+	err = d.parseSchema(refdDocumentNode, newSchema)
 	if err != nil {
 		return err
 	}
